@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,14 @@ public class StudentController {
 	@PostMapping("/student")
 	public void addStudent(@RequestBody Student student) {
 		students.add(student);
+	}
+	
+	@PutMapping("/student/{firstName}")
+	public void updateStudent(@PathVariable("firstName") String firstName, @RequestBody Student student) {
+		students.forEach(s -> {if(s.getFirstName().equals(firstName)) {
+			s.setFirstName(student.getFirstName());
+			s.setLastName(student.getLastName());
+		}});
 	}
 
 }
