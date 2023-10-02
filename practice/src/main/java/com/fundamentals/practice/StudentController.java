@@ -3,6 +3,7 @@ package com.fundamentals.practice;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,15 @@ public class StudentController {
 			s.setFirstName(student.getFirstName());
 			s.setLastName(student.getLastName());
 		}});
+	}
+	
+	@DeleteMapping("/student/{firstName}")
+	public void delStudent(@PathVariable(value ="firstName") String firstName) {
+		for(Student stu : students) {
+			if(stu.getFirstName().equals(firstName)) {
+				students.remove(stu);
+			}
+		}
 	}
 
 }
